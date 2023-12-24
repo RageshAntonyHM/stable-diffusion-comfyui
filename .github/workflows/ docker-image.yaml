@@ -25,9 +25,23 @@ jobs:
         large-packages: true
         docker-images: false
         swap-storage: true
-
-  docker:
+  maximize-build-space:
+    name: Maximize build space
     needs: free-disk-space
+    runs-on: ubuntu-latest
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+          remove-dotnet: 'true'
+  docker:
+    needs: maximize-build-space
     runs-on: ubuntu-latest
     steps:
       -
