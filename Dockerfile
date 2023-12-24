@@ -88,16 +88,24 @@ RUN cd ComfyUI/custom_nodes && git clone https://github.com/Gourieff/comfyui-rea
 
 RUN cd ComfyUI/custom_nodes && git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack.git && cd ComfyUI-Impact-Pack && python install.py
 
-RUN pip uninstall opencv-python opencv-python-headless --yes
-RUN pip install opencv-python 
-
 RUN cd ComfyUI/custom_nodes && git clone https://github.com/cubiq/ComfyUI_IPAdapter_plus.git
 
 RUN cd ComfyUI/custom_nodes && git clone https://github.com/cubiq/ComfyUI_essentials.git
 
 RUN cd ComfyUI/custom_nodes && git clone https://github.com/mav-rik/facerestore_cf.git && cd facerestore_cf && chmod 777 install.sh && sh install.sh
 
+RUN pip uninstall opencv-python opencv-python-headless opencv-contrib-python --yes
+RUN pip install opencv-python==4.7.0.72 gitpython segment_anything 
+
 RUN echo "GIT packs installed"
+
+#download models
+
+RUN cd ComfyUI/models && mkdir ipadapter && cd ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors  
+RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors
+RUN cd ComfyUI/models/clip_vision && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors -O  CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors
+RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin
+
 
 # NGINX Proxy
 #COPY --from=proxy nginx.conf /etc/nginx/nginx.conf
@@ -105,6 +113,7 @@ RUN echo "GIT packs installed"
 
 COPY container-template/proxy/nginx.conf /etc/nginx/nginx.conf
 COPY container-template/proxy/readme.html /usr/share/nginx/html/readme.html
+
 
 RUN echo "ngnix installed "
 
