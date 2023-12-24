@@ -89,7 +89,7 @@ RUN cd ComfyUI/custom_nodes && git clone https://github.com/Gourieff/comfyui-rea
 RUN cd ComfyUI/custom_nodes && git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack.git && cd ComfyUI-Impact-Pack && python install.py
 
 RUN pip uninstall opencv-python opencv-python-headless --yes
-RUN pip install opencv-python --yes
+RUN pip install opencv-python 
 
 RUN cd ComfyUI/custom_nodes && git clone https://github.com/cubiq/ComfyUI_IPAdapter_plus.git
 
