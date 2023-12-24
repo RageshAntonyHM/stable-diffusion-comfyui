@@ -1,6 +1,6 @@
 # Import necessary base images
 #FROM runpod/stable-diffusion:models-1.0.0 as sd-models
-FROM runpod/stable-diffusion-models:2.1 as hf-cache
+#FROM runpod/stable-diffusion-models:2.1 as hf-cache
 FROM nvidia/cuda:11.8.0-base-ubuntu22.04 as runtime
 #FROM scripts
 #FROM proxy
@@ -72,7 +72,7 @@ RUN echo "ComfyUI Packages installed "
 
 # Create necessary directories and copy necessary files
 RUN set -e && mkdir -p /root/.cache/huggingface && mkdir /comfy-models
-COPY --from=hf-cache /root/.cache/huggingface /root/.cache/huggingface
+#COPY --from=hf-cache /root/.cache/huggingface /root/.cache/huggingface
 #COPY --from=sd-models /SDv1-5.ckpt /comfy-models/v1-5-pruned-emaonly.ckpt
 #COPY --from=sd-models /SDv2-768.ckpt /comfy-models/SDv2-768.ckpt
 #RUN wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -O /comfy-models/sd_xl_base_1.0.safetensors 
