@@ -39,7 +39,6 @@ jobs:
           remove-android: 'true'
           remove-haskell: 'true'
           remove-codeql: 'true'
-          remove-dotnet: 'true'
   docker:
     needs: maximize-build-space
     runs-on: ubuntu-latest
