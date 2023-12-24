@@ -27,6 +27,7 @@ jobs:
         swap-storage: true
 
   docker:
+    needs: free-disk-space
     runs-on: ubuntu-latest
     steps:
       -
