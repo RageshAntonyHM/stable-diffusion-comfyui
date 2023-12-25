@@ -75,7 +75,7 @@ RUN set -e && mkdir -p /root/.cache/huggingface && mkdir /comfy-models
 #COPY --from=hf-cache /root/.cache/huggingface /root/.cache/huggingface
 #COPY --from=sd-models /SDv1-5.ckpt /comfy-models/v1-5-pruned-emaonly.ckpt
 #COPY --from=sd-models /SDv2-768.ckpt /comfy-models/SDv2-768.ckpt
-#RUN wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -O /comfy-models/sd_xl_base_1.0.safetensors 
+RUN wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -O ComfyUI/models/sd_xl_base_1.0.safetensors 
 #RUN wget https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors -O /comfy-models/sd_xl_refiner_1.0.safetensors
 
 RUN echo "necessary directories installed "
@@ -93,19 +93,21 @@ RUN cd ComfyUI/custom_nodes && git clone https://github.com/cubiq/ComfyUI_IPAdap
 RUN cd ComfyUI/custom_nodes && git clone https://github.com/cubiq/ComfyUI_essentials.git
 
 RUN cd ComfyUI/custom_nodes && git clone https://github.com/mav-rik/facerestore_cf.git && cd facerestore_cf && chmod 777 install.sh && sh install.sh
-
+RUN cd ComfyUI/custom_nodes && git clone https://github.com/Fannovel16/comfyui_controlnet_aux.git && cd comfyui_controlnet_aux && pip install -r requirements.txt
 RUN pip uninstall opencv-python opencv-python-headless opencv-contrib-python --yes
 RUN pip install opencv-python==4.7.0.72 gitpython segment_anything 
 
 RUN echo "GIT packs installed"
 
 #download models
-
+RUN git lfs install
+RUN cd ComfyUI/models/controlnet && git clone https://huggingface.co/lllyasviel/ControlNet-v1-1
 RUN cd ComfyUI/models && mkdir ipadapter && cd ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors  
 RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors
 RUN cd ComfyUI/models/clip_vision && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors -O  CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors
 RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin
-
+RUN cd ComfyUI/models/checkpoints  && wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -O sd_xl_base_1.0.safetensors
+RUN cd ComfyUI/models/checkpoints  && wget https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors -O sd_xl_refiner_1.0.safetensors
 
 # NGINX Proxy
 #COPY --from=proxy nginx.conf /etc/nginx/nginx.conf
