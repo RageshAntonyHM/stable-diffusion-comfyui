@@ -109,8 +109,9 @@ RUN cd ComfyUI/models && mkdir ipadapter && cd ipadapter && wget https://hugging
 RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors
 RUN cd ComfyUI/models/clip_vision && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors -O  CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors
 RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin
-RUN cd ComfyUI/models/checkpoints  && wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -O sd_xl_base_1.0.safetensors
-RUN cd ComfyUI/models/checkpoints  && wget https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors -O sd_xl_refiner_1.0.safetensors
+
+#RUN cd ComfyUI/models/checkpoints  && wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -O sd_xl_base_1.0.safetensors
+#RUN cd ComfyUI/models/checkpoints  && wget https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors -O sd_xl_refiner_1.0.safetensors
 
 # NGINX Proxy
 #COPY --from=proxy nginx.conf /etc/nginx/nginx.conf
