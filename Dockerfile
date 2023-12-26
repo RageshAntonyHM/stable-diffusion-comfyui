@@ -129,6 +129,7 @@ RUN apt-get update
 COPY pre_start.sh /pre_start.sh
 #COPY --from=scripts start.sh /
 COPY container-template/start.sh /start.sh
+COPY post_start.sh /post_start.sh
 RUN chmod +x /start.sh
 
 RUN echo "EVERYTHING DONE"

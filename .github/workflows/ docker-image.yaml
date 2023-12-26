@@ -60,4 +60,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: rageshantony/comfyui_own:v6
+          tags: rageshantony/comfyui_own:v7
