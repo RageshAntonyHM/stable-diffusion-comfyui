@@ -25,6 +25,9 @@ RUN apt-get update --yes && \
     rm -rf /var/lib/apt/lists/* && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 
+RUN apt install git-lfs -y 
+RUN git-lfs install
+
 RUN echo "base Packages installed "
 
 # Set up Python and pip
@@ -100,7 +103,6 @@ RUN pip install opencv-python==4.7.0.72 gitpython segment_anything
 RUN echo "GIT packs installed"
 
 #download models
-RUN git lfs install
 RUN cd ComfyUI/models/controlnet && git clone https://huggingface.co/lllyasviel/ControlNet-v1-1
 RUN cd ComfyUI/models && mkdir ipadapter && cd ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors  
 RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors
