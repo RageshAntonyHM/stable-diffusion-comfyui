@@ -25,6 +25,7 @@ RUN apt-get update --yes && \
     rm -rf /var/lib/apt/lists/* && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
 RUN apt install git-lfs -y 
 RUN git-lfs install
 
