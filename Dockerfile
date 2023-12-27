@@ -79,8 +79,9 @@ RUN set -e && mkdir -p /root/.cache/huggingface && mkdir /comfy-models
 #COPY --from=hf-cache /root/.cache/huggingface /root/.cache/huggingface
 #COPY --from=sd-models /SDv1-5.ckpt /comfy-models/v1-5-pruned-emaonly.ckpt
 #COPY --from=sd-models /SDv2-768.ckpt /comfy-models/SDv2-768.ckpt
-RUN wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -O ComfyUI/models/sd_xl_base_1.0.safetensors 
-#RUN wget https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors -O /comfy-models/sd_xl_refiner_1.0.safetensors
+RUN wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -O ComfyUI/models/checkpoints/sd_xl_base_1.0.safetensors 
+RUN wget https://civitai.com/api/download/models/245598?type=Model&format=SafeTensor&size=pruned&fp=fp16 -O ComfyUI/models/checkpoints/Realistic_Vision_6_B1.safetensors 
+RUN wget https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors -O ComfyUI/models/checkpoints/sd_xl_refiner_1.0.safetensors
 
 RUN echo "necessary directories installed "
 
@@ -105,11 +106,15 @@ RUN echo "GIT packs installed"
 
 #download models
 RUN cd ComfyUI/models/controlnet && git clone https://huggingface.co/lllyasviel/ControlNet-v1-1
+RUN cd ComfyUI/models/controlnet && wget https://huggingface.co/lllyasviel/sd_control_collection/resolve/d1b278d0d1103a3a7c4f7c2c327d236b082a75b1/diffusers_xl_canny_full.safetensors?download=true -O diffusers_xl_canny_full.safetensors
+RUN cd ComfyUI/models/controlnet && wget https://huggingface.co/lllyasviel/sd_control_collection/resolve/d1b278d0d1103a3a7c4f7c2c327d236b082a75b1/diffusers_xl_depth_full.safetensors?download=true -O diffusers_xl_depth_full.safetensors
 RUN cd ComfyUI/models && mkdir ipadapter && cd ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors  
 RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors
 RUN cd ComfyUI/models/clip_vision && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors -O  CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors
 RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin
-
+RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors
+RUN cd ComfyUI/models/loras && wget https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15_lora.safetensors
+RUN cd ComfyUI/models/facerestore_models && wget https://github.com/TencentARC/GFPGAN/releases/download/v1.3.4/GFPGANv1.4.pth || echo "Face restore download failed" :
 #RUN cd ComfyUI/models/checkpoints  && wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -O sd_xl_base_1.0.safetensors
 #RUN cd ComfyUI/models/checkpoints  && wget https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors -O sd_xl_refiner_1.0.safetensors
 
@@ -135,7 +140,7 @@ COPY pre_start.sh /pre_start.sh
 COPY container-template/start.sh /start.sh
 COPY post_start.sh /post_start.sh
 RUN chmod +x /start.sh
-
+RUN chmod +x /post_start.sh
 RUN echo "EVERYTHING DONE"
 
 
