@@ -109,9 +109,9 @@ RUN pip install opencv-python==4.7.0.72 gitpython segment_anything
 RUN echo "GIT packs installed"
 
 #download models
-RUN cd ComfyUI/models/controlnet && git clone https://huggingface.co/lllyasviel/ControlNet-v1-1
-RUN cd ComfyUI/models/controlnet && wget https://huggingface.co/lllyasviel/sd_control_collection/resolve/d1b278d0d1103a3a7c4f7c2c327d236b082a75b1/diffusers_xl_canny_full.safetensors?download=true -O diffusers_xl_canny_full.safetensors
-RUN cd ComfyUI/models/controlnet && wget https://huggingface.co/lllyasviel/sd_control_collection/resolve/d1b278d0d1103a3a7c4f7c2c327d236b082a75b1/diffusers_xl_depth_full.safetensors?download=true -O diffusers_xl_depth_full.safetensors
+#RUN cd ComfyUI/models/controlnet && git clone https://huggingface.co/lllyasviel/ControlNet-v1-1
+#RUN cd ComfyUI/models/controlnet && wget https://huggingface.co/lllyasviel/sd_control_collection/resolve/d1b278d0d1103a3a7c4f7c2c327d236b082a75b1/diffusers_xl_canny_full.safetensors?download=true -O diffusers_xl_canny_full.safetensors
+#RUN cd ComfyUI/models/controlnet && wget https://huggingface.co/lllyasviel/sd_control_collection/resolve/d1b278d0d1103a3a7c4f7c2c327d236b082a75b1/diffusers_xl_depth_full.safetensors?download=true -O diffusers_xl_depth_full.safetensors
 RUN cd ComfyUI/models && mkdir ipadapter && cd ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors  
 RUN cd ComfyUI/models/ipadapter && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors
 RUN cd ComfyUI/models/clip_vision && wget https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors -O  CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors
