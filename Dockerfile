@@ -67,6 +67,10 @@ RUN jupyter contrib nbextension install --user && \
 
 RUN echo "jupyter Packages installed "
 
+RUN mkdir workspace
+
+WORKDIR /workspace
+
 # Install ComfyUI
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
     cd /ComfyUI && \
