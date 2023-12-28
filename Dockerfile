@@ -73,7 +73,7 @@ WORKDIR /workspace
 
 # Install ComfyUI
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
-    cd /ComfyUI && \
+    cd ComfyUI && \
     pip install -r requirements.txt
 
 RUN echo "ComfyUI Packages installed "
