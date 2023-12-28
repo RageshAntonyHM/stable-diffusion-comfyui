@@ -80,7 +80,7 @@ RUN set -e && mkdir -p /root/.cache/huggingface && mkdir /comfy-models
 #COPY --from=sd-models /SDv1-5.ckpt /comfy-models/v1-5-pruned-emaonly.ckpt
 #COPY --from=sd-models /SDv2-768.ckpt /comfy-models/SDv2-768.ckpt
 RUN wget https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors -O ComfyUI/models/checkpoints/sd_xl_base_1.0.safetensors 
-RUN wget https://civitai.com/api/download/models/245598?type=Model&format=SafeTensor&size=pruned&fp=fp16 -O ComfyUI/models/checkpoints/Realistic_Vision_6_B1.safetensors 
+RUN wget "https://civitai.com/api/download/models/245598?type=Model&format=SafeTensor&size=pruned&fp=fp16" -O ComfyUI/models/checkpoints/Realistic_Vision_6_B1.safetensors
 RUN wget https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors -O ComfyUI/models/checkpoints/sd_xl_refiner_1.0.safetensors
 
 RUN echo "necessary directories installed "
