@@ -7,4 +7,5 @@ source /venv/bin/activate
 
 cd /workspace/ComfyUI
 git pull
+CUDA_VISIBLE_DEVICES=1
 python main.py --listen --port 3000 &
